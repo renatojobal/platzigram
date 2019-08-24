@@ -12,8 +12,14 @@ def hello_world(request):
     return HttpResponse('Oh, hi! Current server time is {now}'.format(now=str(now)))
 
 
-def hi(request):
-    return HttpResponse('Hi!')
+def hi(request, name, age):
+    if age < 12:
+        message = 'Sorry %s you are not allowed here' % (name)
+    else:
+        message = 'Hi There %d Welcome tot Platzigram' % (age)
+
+    return HttpResponse(message)
+    
 
 def order_numbers(request):
     numbers = [int(i) for i in request.GET['numbers'].split(',')]
