@@ -113,3 +113,5 @@ venv.bak/
 media/
 
 platzigram/db.sqlite3
+
+*.pyc
