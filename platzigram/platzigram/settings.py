@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     # Our apss
     'posts',
+    'users',
 ]
 
 MIDDLEWARE = [
