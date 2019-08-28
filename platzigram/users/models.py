@@ -16,7 +16,7 @@ class Profile(models.Model):
 
     picture = models.ImageField(upload_to='users/picture', blank=True, null=True)
 
-    create = models.DateField(auto_now_add=True)
+    created = models.DateField(auto_now_add=True)
     modified = models.DateField(auto_now=True)
 
     def __str__(self):
