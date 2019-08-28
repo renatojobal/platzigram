@@ -3,14 +3,14 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 # Models
-from users.models import Profile
+from .models import Profile
 from django.contrib.auth.models import User
 
 
 # Register your models here.
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    # Perfil dedl admin
+    # Perfil del admin
 
 
     list_display = ('pk', 'user', 'phone_number', 'website', 'picture')
