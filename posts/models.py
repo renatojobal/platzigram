@@ -1,13 +1,13 @@
-
-
 # Django
 from django.db import models
+from django.contrib.auth.models import User
 
 # Utilities
 
 
-class Posst(models.Model):
+class Post(models.Model):
 
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     profile = models.ForeignKey('users.Profile', on_delete=models.CASCADE)
 
     title = models.CharField(max_length=255)
@@ -17,4 +17,4 @@ class Posst(models.Model):
     modified = models.DateField(auto_now=True)
 
     def __str__(self):
-        return '%s by %s' % (self.title, self.profile.username)
+        return '%s by @%s' % (self.title, self.user.username)
