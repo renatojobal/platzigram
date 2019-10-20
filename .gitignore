@@ -1,8 +1,3 @@
-.env/
-*pyc
-*cpython-37.pyc
-
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -108,10 +103,5 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-# Django
-*.sqlite3
-media/
-
-platzigram/db.sqlite3
-
-*.pyc
+# vscode
+.vscode/settings.json
