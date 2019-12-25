@@ -25,11 +25,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello-world/', local_views.hello_world, name='hellow_world'),
     path('hi/<str:name>/<int:age>/', local_views.hi, name='hi'),
-    path('order-numbers/', local_views.order_numbers, name='order'),
+    path('order-numbers/', local_views.order_numbers, name='sort'),
 
-    path('posts/', posts_views.list_posts, name='list_posts'),
+    path('posts/', posts_views.list_posts, name='feed'),
 
-    path('users/login', users_views.login_view, name='login'),
+    path('users/login/', users_views.login_view, name='login'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
