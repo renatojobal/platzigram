@@ -3,6 +3,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
+
+from django.contrib.auth.models import User
+from users.models import Profile
+
 # Create your views here.
 def login_view(request):
     """Login view"""
@@ -25,3 +29,36 @@ def logout_view(request):
 
     logout(request)
     return redirect('login')
+
+
+def signup(request):
+    """Signup view"""
+
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        password_confirmation = request.POST['password_confirmation']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        email = request.POST['email']
+
+        if(password != password_confirmation):
+            return render(request, 'users/signup.html', {'error': 'Passwords does not match'})
+
+
+
+        if(User.objects.filter(username=username).exists()):
+            return render(request, 'users/signup.html', {'error': 'This username is already taken'})
+
+        user = User.objects.create_user(username=username, 
+                        password=password, 
+                        first_name=first_name,
+                        last_name=last_name,
+                        email=email)
+
+        profile = Profile(user=user)
+        profile.save()
+        return redirect('logout')
+
+
+    return render(request, 'users/signup.html')
