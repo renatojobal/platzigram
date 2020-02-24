@@ -27,7 +27,9 @@ urlpatterns = [
     path('hi/<str:name>/<int:age>/', local_views.hi, name='hi'),
     path('order-numbers/', local_views.order_numbers, name='sort'),
 
-    path('posts/', posts_views.list_posts, name='feed'),
+    path('', posts_views.list_posts, name='feed'),
+
+    path('posts/new/', posts_views.create_post, name='create_post'),
 
     path('users/login/', users_views.login_view, name='login'),
 
