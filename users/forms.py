@@ -36,8 +36,8 @@ class SignupForm(forms.Form):
 
     def clean__username(self):
         """Username must be unique"""
-        username self.cleaned_data['username']
-        query = User.object.filter(username=username).exist()
+        username = self.cleaned_data['username']
+        query = User.objects.filter(username=username).exist()
         if query:
             raise forms.ValidationError('Username is already in use')
         
@@ -45,7 +45,19 @@ class SignupForm(forms.Form):
         return username
 
 
-        
+    # Validando campos dependientes, lo hacemos en el último
+    # método que se llama que es 'clean()'
+    def clean(self):
+        """Verify password confirmation match."""
+        data = super().clean()
+
+        password = data['password']
+        password_confirmation = data['password_confirmation']
+
+        if password != password_confirmation:
+            raise forms.ValidationError('Passwords do not match')
+
+        return data
 
 class ProfileForm(forms.Form):
     """Profile form"""
