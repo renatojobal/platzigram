@@ -28,7 +28,7 @@ class SignupForm(forms.Form):
                                 required=True)
 
     first_name = forms.CharField(min_length=2, max_length=50)
-    lastt_name = forms.CharField(min_length=2, max_length=50)
+    last_name = forms.CharField(min_length=2, max_length=50)
 
     email = forms.EmailField(min_length=6, 
                             max_length=70)
