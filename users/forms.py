@@ -9,6 +9,7 @@ from django import forms
 
 # Models
 from django.contrib.auth.models import User
+from users.models import Profile
 
 
 class SignupForm(forms.Form):
@@ -58,6 +59,18 @@ class SignupForm(forms.Form):
             raise forms.ValidationError('Passwords do not match')
 
         return data
+        
+    def save(self):
+        """Create an user and profile"""
+        data = self.cleaned_data
+        data.pop('password_confirmation')
+
+        user = User.objects.create_user(**data)
+
+        profile = Profile(user=user)
+        profile.save()
+
+
 
 class ProfileForm(forms.Form):
     """Profile form"""
