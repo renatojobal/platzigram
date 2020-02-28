@@ -12,9 +12,8 @@
     <div class="row justify-content-md-center">
         <div class="col-6 p-4" id="profile-box">
 
-            <form action="{% url "users:update_profile" %}" method="POST" enctype="multipart/form-data">
+            <form action="{% url 'users:update' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-
 
                 <div class="media">
                     {% if profile.picture %}
@@ -30,9 +29,9 @@
                 </div>
 
                 {% for error in form.picture.errors %}
-                    <div class="alert-danger">
-                        <b>Picture: {{ error }}</b>
-                    </div>
+                <div class="alert alert-danger">
+                    <b>Picture: </b>{{ error }}
+                </div>
                 {% endfor %}
 
                 <hr><br>
@@ -40,38 +39,36 @@
                 {# Website field #}
                 <div class="form-group">
                     <label>Website</label>
-
                     <input
                         class="form-control {% if form.website.errors %}is-invalid{% endif %}"
                         type="text"
                         name="website"
                         placeholder="Website"
-                        value="{% if form.website.errors %}{{ form.website.value }}{% else %}{{ profile.website }}{% endif %}"
+                        value="{% if form.errors %}{{ form.website.value }}{% else %}{{ profile.website }}{% endif %}"
                     />
                     <div class="invalid-feedback">
                         {% for error in form.website.errors %}
                             {{ error }}
-                        {% endfor %}
+                        {% endfor%}
                     </div>
                 </div>
 
+                {# Biography field #}
                 <div class="form-group">
                     <label>Biography</label>
-                    <textarea class="form-control {% if form.biography.errors %}is-invalid{% endif %}" 
-                        name="biography">
-                        {% if form.biography.errors %}
-                            {{ form.biography.value }}
-                        {% else %}
-                            {{ profile.biography }}
-                        {% endif %}
-                    </textarea>
+                    <textarea
+                        class="form-control {% if form.biography.errors %}is-invalid{% endif %}"
+                        name="biography"
+                    >{% if form.errors %}{{ form.biography.value }}{% else %}{{ profile.biography }}{% endif %}</textarea>
+
                     <div class="invalid-feedback">
                         {% for error in form.biography.errors %}
                             {{ error }}
-                        {% endfor %}
+                        {% endfor%}
                     </div>
                 </div>
 
+                {# Phone number field #}
                 <div class="form-group">
                     <label>Phone number</label>
                     <input
@@ -79,12 +76,12 @@
                         type="text"
                         name="phone_number"
                         placeholder="Phone number"
-                        value="{% if form.phone_number.errors %}{{ form.phone_number.value }}{% else %}{{ profile.phone_number }}{% endif %}"
+                        value="{% if form.errors %}{{ form.phone_number.value }}{% else %}{{ profile.phone_number }}{% endif %}"
                     />
                     <div class="invalid-feedback">
                         {% for error in form.phone_number.errors %}
                             {{ error }}
-                        {% endfor %}
+                        {% endfor%}
                     </div>
                 </div>
 

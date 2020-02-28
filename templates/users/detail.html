@@ -8,15 +8,22 @@
 
     <div class="container mb-5" style="margin-top: 8em;">
         <div class="row">
+
             <div class="col-sm-4 d-flex justify-content-center">
-                <img src="{{ user.profile.picture.url }}" alt="@{{ user.username}}" class="rounded-circle" width="150px" />
+                <img
+                    src="{{ user.profile.picture.url }}"
+                    alt="@{{ user.username}}"
+                    class="rounded-circle"
+                    width="150px"
+                />
             </div>
+
             <div class="col-sm-8">
                 <h2 style="font-weight: 100;">
                     {{ user.username }}
                     {% if user == request.user %}
                         <a
-                            href="{% url "users:update_profile" %}"
+                            href="{% url "users:update" %}"
                             class="ml-5 btn btn-sm btn-outline-info"
                         >
                             Edit profile
@@ -30,6 +37,7 @@
                         </a>
                     {% endif %}
                 </h2>
+
                 <div class="row mt-2" style="font-size: 1.2em">
                     <div class="col-sm-4">
                         <b>{{ user.profile.posts_count }}785</b> posts
@@ -51,5 +59,17 @@
     </div>
 
     <hr>
+
+    <div class="container" id="user-posts">
+        <div class="row mt-3">
+            {% for post in posts %}
+            <div class="col-sm-4 pt-5 pb-5 pr-5 pl-5 d-flex justify-content-center align-items-center">
+                <a href="" class="border">
+                    <img src="{{ post.photo.url }}" alt="{{ post.title }}" class="img-fluid"/>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 
 {% endblock %}
