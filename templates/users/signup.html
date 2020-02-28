@@ -7,7 +7,7 @@
 
 {% block container %}
 
-    <form method="POST" action="{% url "signup" %}">
+    <form method="POST" action="{% url "users:signup" %}">
         {% csrf_token %}
         
         {{ form.as_p }}
@@ -19,7 +19,7 @@
     </form>
 
 
-    <p class="mt-4"><a href="{% url "login" %}">Go back to login.</a></p>
+    <p class="mt-4"><a href="{% url "users:login" %}">Go back to login.</a></p>
 
 
 

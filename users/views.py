@@ -6,10 +6,28 @@ from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.models import User
 from users.models import Profile
+from django.views.generic import TemplateView, DetailView
+
+# MOdels
+from django.contrib.auth.models import User
 
 # Forms
 from users.forms import (ProfileForm,
                         SignupForm)
+
+
+
+class UserDetailView(DetailView):
+    """User detail view"""
+
+    temaplete_name = 'users/detail.html'
+    slug_field = 'username'
+    slug_url_kwarg = 'username'
+    queryset = User.objects.all()
+
+
+
+
 
 @login_required
 def update_profile(request):
@@ -27,7 +45,7 @@ def update_profile(request):
 
             profile.save()
 
-            return redirect('update_profile')
+            return redirect('users:update_profile')
     else:
         form = ProfileForm()
 
@@ -55,7 +73,7 @@ def login_view(request):
         user = authenticate(request=request, username=username, password=password)
         if user:
             login(request, user)
-            return redirect('feed')
+            return redirect('posts:feed')
         else:
             return render(request, 'users/login.html', context={'error': 'Invalid username or password'})
     return render(request, 'users/login.html')
@@ -75,7 +93,7 @@ def signup(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')
+            return redirect('users:login')
     else:
         form = SignupForm
 
